@@ -17,8 +17,18 @@ public class LineProcessor {
      *
      * @param filePath Ruta del fichero
      */
-    public void readCSVFile(String filePath) {
-        try {
+    public void readCSVFile(String filePath) throws Exception {
+
+            if (filePath == null) {
+                throw new Exception("Nombre de fichero nulo");
+            } else if (filePath.equals("")) {
+                throw new Exception("Nombre de fichero vacío");
+            } else if (!filePath.endsWith(".csv")) {
+                String extension = filePath.replaceAll("^.*\\.(.*)$", "$1");
+                String message = String.format("Extensión de fichero no compatible (.%s)\n", extension);
+                throw new Exception(message);
+            }
+
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;
             int lineCount = 0;
@@ -27,9 +37,7 @@ public class LineProcessor {
                 lineCount++;
                 processLine(lineCount, values);
             }
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+
     }
 
     /**

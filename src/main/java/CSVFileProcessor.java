@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class CSVFileProcessor {
 
-    private String filePath;
+    private final String filePath;
     private final LineProcessor processor;
 
     public CSVFileProcessor(String filePath) {
@@ -11,31 +11,18 @@ public class CSVFileProcessor {
         this.processor = new LineProcessor();
     }
 
-    void init() {
-        if (filePath == null || filePath.equals("")) {
-            filePath = getFilePath();
-        }
-        processor.readCSVFile(filePath);
-        showResults();
-    }
-
     /**
-     * Método que obtiene la ruta del fichero.
-     *
-     * @return Ruta del fichero
+     * Método que inicia el proceso del archivo.
+     * Si el archivo no existe, o es nulo, pide otro archivo por consola.
      */
-    private String getFilePath() {
-        Scanner scanner = new Scanner(System.in);
-        String filePath;
-
-        System.out.println("Introduce el fichero a procesar o deja en blanco y pulsa ENTER\n" +
-                "para procesar el archivo de prueba example.csv:");
-
-        filePath = scanner.nextLine();
-        scanner.close();
-        return filePath;
+    void init() {
+        try {
+            processor.readCSVFile(filePath);
+            showResults();
+        } catch (Exception e) {
+            System.err.printf("\nError: %s\n", e.getMessage());
+        }
     }
-
 
     /**
      * Método que muestra los resultados del proceso por consola.

@@ -59,8 +59,8 @@ class CSVFileProcessorTest {
                 Línea 19 - Error: Línea mal formada - [alumno19@dominio.com, NombreAlumno1 ApellidoAlumno16]
                 Línea 21 - Error: Línea mal formada - [alumno21@dominio.com, , usuario18]
                 Línea 24 - Error: Correo duplicado - 'alumno23@dominio.com'
-                Línea 25 - Error: Línea mal formada - [alumno25@dominio., NombreAlumno25 ApellidoAlumno25, usuario25]""", outputStreamCaptor.toString()
-                .trim());
+                Línea 25 - Error: Línea mal formada - [alumno25@dominio., NombreAlumno25 ApellidoAlumno25, usuario25]""",
+                outputStreamCaptor.toString().trim());
     }
 
     @Test
